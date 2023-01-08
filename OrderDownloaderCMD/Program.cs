@@ -27,9 +27,36 @@ class OrderDownloader
             OrderId = 58292809
         };
         var result = connected.SendAsync(request).GetAwaiter().GetResult().Orders;
-        Console.ReadLine();
     }
 }
 
+
+class SubiektConnector
+{
+    [STAThread]
+    static void Main(string[] args)
+    {
+        try
+        {
+            InsERT.GT gt = new InsERT.GT();
+            gt.Produkt = InsERT.ProduktEnum.gtaProduktSubiekt;
+            gt.Serwer = "DESKTOP-PDDM77M\\INSERTGT";
+            gt.Baza = "Testowy";
+            gt.Autentykacja - InsERT.AutentykacjaEnum.gtaAutentykacjaMieszana;
+            gt.Uzytkownik = "sa";
+            gt.Uzytkownik = "";
+            gt.Operator = "Szef";
+            gt.OperatorHaslo = "";
+
+            InsERT.Subiekt subiekt = (InsERT.Subiekt)gt.Uruchom((Int32))InsERT.UruchomDopasujEnum.gtaUruchomDopasuj, (Int32)InsERT.UruchomEnum.gtaUruchomNieArchiwizujPrzyZamykaniu);
+            subiekt.Okno.Widoczne = true;
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.ReadKey();
+        }
+    }
+}
    
 
