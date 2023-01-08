@@ -10,38 +10,26 @@ using System.Threading.Tasks;
 using BaseLinkerApi.Common;
 using BaseLinkerApi.Common.JsonConverters;
 using RateLimiter;
+using BaseLinkerApi.Requests.Orders;
+using System.Linq.Expressions;
 
-
+namespace BaseLinkerOrderDownloader;
 
 
 class OrderDownloader
 {
     static void Main(string[] args)
     {
-        ApiConnector connected = new ApiConnector("2001423-2006490-YUNDJTP4BBH14NRYKTOFU7VOFRVQQBHUUA7ZWBB6UCG0KVHAXAE13LLOPHDC4IMZ");
-        Console.WriteLine(connected._Token);
-
+        var httpClient = new HttpClient();
+        var connected = new BaseLinkerApiClient(httpClient, "2001423-2006490-YUNDJTP4BBH14NRYKTOFU7VOFRVQQBHUUA7ZWBB6UCG0KVHAXAE13LLOPHDC4IMZ");
+        var request = new GetOrders()
+        {
+            OrderId = 58292809
+        };
+        var result = connected.SendAsync(request).GetAwaiter().GetResult().Orders;
+        Console.ReadLine();
     }
-
 }
 
+   
 
-
-
-
-class ApiConnector
-{
-    public string _token;
-    public ApiConnector(string _token)
-    {
-        
-        this._token = _token;
-    }
-    public string _Token
-    {
-        get { return _token; }
-        set { _token = value;  }
-       
-    }
-    
-}
