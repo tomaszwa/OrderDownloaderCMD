@@ -38,35 +38,28 @@ class OrderDownloader
         sgt.Okno.Widoczne = true;
     }
 
-        //var httpClient = new HttpClient();
-        //var connected = new BaseLinkerApiClient(httpClient, "2001423-2006490-YUNDJTP4BBH14NRYKTOFU7VOFRVQQBHUUA7ZWBB6UCG0KVHAXAE13LLOPHDC4IMZ");
-        //var request = new GetOrders()
-        //{
-        //    OrderId = 58292809
-        //};
-        //var result = connected.SendAsync(request).GetAwaiter().GetResult().Orders;
+    static void ApiConnector()
+    {
+        var httpClient = new HttpClient();
+        var connected = new BaseLinkerApiClient(httpClient, "2001423-2006490-YUNDJTP4BBH14NRYKTOFU7VOFRVQQBHUUA7ZWBB6UCG0KVHAXAE13LLOPHDC4IMZ");
+        var request = new GetOrders()
+        {
+            OrderId = 58292809
+        };
+        var result = connected.SendAsync(request).GetAwaiter().GetResult().Orders;
+
+    }
 
 
+    static void OrderIn(string[] args)
+    {
+
+    }
 }
 
 
 
 
-
-//public class Connector
-//{
-//    static int Second()
-//    {
-//        ADODB.Connection conDatabase = new ADODB.Connection();
-//        return 0;
-//    }
-//    public void _Connection.Open(string ConnectionString, string UserID, string Password, int Options)
-
-
-
-
-
-//}
 
 
 
