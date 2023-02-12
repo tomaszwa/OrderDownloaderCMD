@@ -37,11 +37,13 @@ class OrderDownloader
         {
             ZKAdder(subiekt, orders);
             Console.WriteLine("Wysłano do sfery, naura.");
+            
         }
         else
         {
-            Console.WriteLine("Nie ma takiego status elo.");
+            Console.WriteLine("Nie ma takiego status i/lub zamówienia elo.");
         }
+        Console.ReadKey();
     }
 
     public static IEnumerable<Order> ApiConnector()
