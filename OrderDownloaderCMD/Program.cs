@@ -22,6 +22,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
 using static BaseLinkerApi.Requests.ProductCatalog.GetInventoryProductsPrices;
 using static BaseLinkerApi.Requests.Orders.GetOrderStatusList;
+using OrderDownloaderCMD;
 
 namespace BaseLinkerOrderDownloader;
 
@@ -109,16 +110,21 @@ class OrderDownloader
 
     public static Subiekt SgtConnector()
     {
-        var gt = new GT();
+
+        var configPath = File.ReadAllText("./Config.json");
+        var config = JsonSerializer.Deserialize<ERPConnectionConfig>(configPath, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true});
+        var gt = new GT()
+        {
+            Produkt = ProduktEnum.gtaProduktSubiekt,
+            Serwer = config.Server,
+            Baza = config.Database,
+            Autentykacja = AutentykacjaEnum.gtaAutentykacjaWindows,
+            Uzytkownik = config.User,
+            UzytkownikHaslo = config.UserPassword,
+            Operator = config.Operator,
+            OperatorHaslo = config.OperatorPassword,
+        };
         Subiekt sgt;
-        gt.Produkt = ProduktEnum.gtaProduktSubiekt;
-        gt.Serwer = "DESKTOP-PDDM77M\\INSERTGT";
-        gt.Baza = "Testowy2";
-        gt.Autentykacja = AutentykacjaEnum.gtaAutentykacjaWindows;
-        gt.Uzytkownik = "sa";
-        gt.Uzytkownik = "";
-        gt.Operator = "Szef";
-        gt.OperatorHaslo = "";
         sgt = (Subiekt)gt.Uruchom((int)UruchomDopasujEnum.gtaUruchomDopasuj, (int)UruchomEnum.gtaUruchomNieArchiwizujPrzyZamykaniu);
         sgt.Okno.Widoczne = true;
 
@@ -187,11 +193,7 @@ class OrderDownloader
         
     }
     
-    //public static SuDokument Zamowienie(Subiekt sgt, Order order, KontrahentJednorazowy kh, SuPozycja tr)
-    //{
-    //    SuDokument zk; 
-
-    //}
+    
 
 }
 
